@@ -10,4 +10,5 @@ class Ticket < ApplicationRecord
   validates :due_date, presence: true
 
   enum penalty_type: { parking: "parking", speeding: "speeding" }
+  enum status: { paid: "paid", pending: "pending", in_dispute: "in_dispute", cancelled: "cancelled"}
 end

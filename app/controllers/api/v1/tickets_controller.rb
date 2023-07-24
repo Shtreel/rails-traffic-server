@@ -6,6 +6,7 @@ class Api::V1::TicketsController < ApplicationController
 
   def create
     ticket = Ticket.new(ticket_params)
+    ticket.vehicle_id = Vehicle.find_by(licence_plate: params[:ticket][:licence_plate], province: params[:ticket][:province])
 
     if ticket.save
       render json: ticket, status: :ok
@@ -15,6 +16,6 @@ class Api::V1::TicketsController < ApplicationController
   end
 
   def ticket_params
-    params.require(:ticket).permit(:vehicle_id, :cost, :penalty_type, :issue_date, :due_date)
+    params.require(:ticket).permit(:cost, :penalty_type, :issue_date, :due_date)
   end
 end
