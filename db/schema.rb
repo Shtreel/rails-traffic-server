@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_24_223436) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_24_224626) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -67,7 +67,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_24_223436) do
     t.string "make", null: false
     t.string "model", null: false
     t.integer "year", null: false
-    t.string "province"
+    t.string "province", null: false
     t.index ["licence_plate", "province"], name: "index_vehicles_on_licence_plate_and_province", unique: true
   end
 

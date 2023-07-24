@@ -6,7 +6,7 @@ class Api::V1::TicketsController < ApplicationController
 
   def create
     ticket = Ticket.new(ticket_params)
-    ticket.vehicle_id = Vehicle.find_by(licence_plate: params[:ticket][:licence_plate], province: params[:ticket][:province])
+    ticket.vehicle = Vehicle.find_by(licence_plate: params["ticket"]["licence_plate"], province: params["ticket"]["province"])
 
     if ticket.save
       render json: ticket, status: :ok
