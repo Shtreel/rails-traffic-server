@@ -1,17 +1,7 @@
 class Api::V1::TicketsController < ApplicationController
   def index
-    tickets = Ticket.all
+    tickets = User.find_by(firebase_id: params[:user_id]).tickets
     render json: tickets, status: :ok
-  end
-
-  def show
-    ticket = Ticket.find_by_id(params[:id])
-
-    if ticket.present?
-      render json: ticket, status: :ok
-    else
-      render json: { error: "Ticket not found" }
-    end
   end
 
   def create
@@ -25,6 +15,6 @@ class Api::V1::TicketsController < ApplicationController
   end
 
   def ticket_params
-    params.require(:ticket).permit([:vehicle_id, :cost, :penalty_type, :issue_date, :due_date])
+    params.require(:ticket).permit(:vehicle_id, :cost, :penalty_type, :issue_date, :due_date)
   end
 end

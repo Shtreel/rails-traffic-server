@@ -25,6 +25,6 @@ class Api::V1::UsersController < ApplicationController
       end
     
       def user_params
-        params.require(:user).permit(:firebase_id, :name, :phone_number, :email)
+        params.require(:user).permit(:firebase_id, :name, :phone_number, :email, :drivers_licence_number)
       end
 end
