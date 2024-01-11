@@ -1,4 +1,4 @@
-class Api::V1::TicketsController < ApplicationController
+class Api::V1::MapMarkersController < ApplicationController
   def index
     render json: MapMarker.all, status: :ok
   end
