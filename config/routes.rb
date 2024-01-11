@@ -8,6 +8,7 @@ Rails.application.routes.draw do
         resources :vehicles, only: %w[index show create]
       end
 
+      resources :map_markers, only: %w[index create]
       resources :tickets, only: %w[create]
     end
   end
