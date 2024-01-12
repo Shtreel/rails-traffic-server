@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_11_025416) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_12_204908) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,9 +32,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_11_025416) do
   create_table "map_markers", force: :cascade do |t|
     t.decimal "latitude", precision: 10, scale: 6, null: false
     t.decimal "longitude", precision: 10, scale: 6, null: false
-    t.integer "icon_type", default: 0, null: false
+    t.string "icon_type", default: "0", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
   end
 
   create_table "tickets", force: :cascade do |t|
