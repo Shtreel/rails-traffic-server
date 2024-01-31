@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>You've been invited to <%= @user.name %>'s vehicle!</p>
+    <p>
+    Vehicle<br>
+    --------------------------
+    </p>
+    <p>Make: <%= @vehicle_invitation.vehicle.make %></p>
+    <p>Model: <%= @vehicle_invitation.vehicle.model %></p>
+    <p>Year: <%= @vehicle_invitation.vehicle.year %></p>
+    ----------
+    </p>
+    <p>Join using this code: <b><%= @vehicle_invitation.code %></b></p>
+  </body>
+</html>

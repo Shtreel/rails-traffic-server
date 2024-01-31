@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resources :users_vehicles, only: %w[create]
+      resources :users_vehicles, only: %w[create] do
+        post :invite, on: :collection
+      end
 
       resources :users, only: %w[index show create] do
         resources :tickets, only: %w[index]

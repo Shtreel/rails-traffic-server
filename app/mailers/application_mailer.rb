@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "waterloo.drivers.app@gmail.com"
+  default from: "driverwaterloo@gmail.com"
   layout "mailer"
 end

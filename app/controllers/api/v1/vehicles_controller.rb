@@ -16,7 +16,7 @@ class Api::V1::VehiclesController < ApplicationController
 
   def create
     new_vehicle_params = vehicle_params
-    new_vehicle_params[:users_vehicles_attributes] = [user_id: User.find_by(firebase_id: params[:user_id]).id]
+    new_vehicle_params[:users_vehicles_attributes] = [user_id: User.find_by(firebase_id: params[:user_id]).id, primary: true]
     vehicle = Vehicle.new(new_vehicle_params)
 
     if vehicle.save

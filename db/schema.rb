@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_12_204908) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_31_013610) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -64,9 +64,18 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_12_204908) do
   create_table "users_vehicles", id: false, force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "vehicle_id", null: false
+    t.boolean "primary", default: false
     t.index ["user_id"], name: "index_users_vehicles_on_user_id"
     t.index ["vehicle_id", "user_id"], name: "index_users_vehicles_on_vehicle_id_and_user_id", unique: true
     t.index ["vehicle_id"], name: "index_users_vehicles_on_vehicle_id"
+  end
+
+  create_table "vehicle_invitations", force: :cascade do |t|
+    t.string "code", null: false
+    t.bigint "vehicle_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["vehicle_id"], name: "index_vehicle_invitations_on_vehicle_id"
   end
 
   create_table "vehicles", force: :cascade do |t|
@@ -83,4 +92,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_12_204908) do
   add_foreign_key "tickets", "vehicles"
   add_foreign_key "users_vehicles", "users"
   add_foreign_key "users_vehicles", "vehicles"
+  add_foreign_key "vehicle_invitations", "vehicles"
 end
