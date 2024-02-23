@@ -3,7 +3,7 @@ class Api::V1::UsersVehiclesController < ApplicationController
     vehicle_invitation = VehicleInvitation.find_by(code: users_vehicles_params[:code])
     user_id = User.find_by(firebase_id: users_vehicles_params[:user_id])&.id
 
-    if vehicle_invitation.present && user_id.present && vehicle_invitation.vehicle.licence_plate == users_vehicles_params[:licence_plate]
+    if vehicle_invitation.present? && user_id.present? && vehicle_invitation.vehicle.licence_plate == users_vehicles_params[:licence_plate]
       users_vehicle = UsersVehicle.new(user_id: user_id, vehicle: vehicle_invitation.vehicle)
 
       if users_vehicle.save
