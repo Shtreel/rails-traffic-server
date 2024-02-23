@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_31_013610) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_23_035916) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -64,7 +64,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_31_013610) do
   create_table "users_vehicles", id: false, force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "vehicle_id", null: false
-    t.boolean "primary", default: false
     t.index ["user_id"], name: "index_users_vehicles_on_user_id"
     t.index ["vehicle_id", "user_id"], name: "index_users_vehicles_on_vehicle_id_and_user_id", unique: true
     t.index ["vehicle_id"], name: "index_users_vehicles_on_vehicle_id"

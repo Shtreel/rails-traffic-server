@@ -19,11 +19,11 @@ class Api::V1::UsersVehiclesController < ApplicationController
   def invite
     user = User.find_by(firebase_id: users_vehicles_invite_params[:user_id])
 
-    unless UsersVehicle.find_by(user_id: user.id, vehicle_id: users_vehicles_invite_params[:vehicle_id]).primary
-      render status: :forbidden
+    # unless UsersVehicle.find_by(user_id: user.id, vehicle_id: users_vehicles_invite_params[:vehicle_id]).primary
+    #   render status: :forbidden
 
-      return
-    end
+    #   return
+    # end
 
     invite_code = SecureRandom.hex(6)
     vehicle_invitation = VehicleInvitation.new(
