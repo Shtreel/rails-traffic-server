@@ -6,12 +6,18 @@ Rails.application.routes.draw do
       end
 
       resources :users, only: %w[index show create] do
-        resources :tickets, only: %w[index]
+        resources :tickets, only: %w[index] do
+          put :dispute, on: :member
+          put :dispute_result, on: :member
+          get :payment_intent, on: :member
+        end
+
         resources :vehicles, only: %w[index show create]
       end
 
       resources :map_markers, only: %w[index create]
       resources :tickets, only: %w[create]
+      resources :payments, only: %w[create]
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

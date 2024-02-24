@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_23_035916) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_24_173429) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -38,6 +38,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_23_035916) do
     t.string "name"
   end
 
+  create_table "payments", force: :cascade do |t|
+    t.string "payment_intent_id", null: false
+    t.bigint "ticket_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ticket_id"], name: "index_payments_on_ticket_id"
+  end
+
   create_table "tickets", force: :cascade do |t|
     t.decimal "cost", null: false
     t.string "penalty_type", null: false
@@ -47,6 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_23_035916) do
     t.datetime "updated_at", null: false
     t.bigint "vehicle_id"
     t.string "status", default: "pending", null: false
+    t.string "ticket_number", null: false
     t.index ["vehicle_id"], name: "index_tickets_on_vehicle_id"
   end
 
@@ -74,6 +83,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_23_035916) do
     t.bigint "vehicle_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_valid", default: true, null: false
     t.index ["vehicle_id"], name: "index_vehicle_invitations_on_vehicle_id"
   end
 
@@ -88,6 +98,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_23_035916) do
     t.index ["licence_plate", "province"], name: "index_vehicles_on_licence_plate_and_province", unique: true
   end
 
+  add_foreign_key "payments", "tickets"
   add_foreign_key "tickets", "vehicles"
   add_foreign_key "users_vehicles", "users"
   add_foreign_key "users_vehicles", "vehicles"

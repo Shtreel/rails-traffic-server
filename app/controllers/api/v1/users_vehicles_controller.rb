@@ -6,7 +6,7 @@ class Api::V1::UsersVehiclesController < ApplicationController
     if vehicle_invitation.present? && user_id.present? && vehicle_invitation.vehicle.licence_plate == users_vehicles_params[:licence_plate]
       users_vehicle = UsersVehicle.new(user_id: user_id, vehicle: vehicle_invitation.vehicle)
 
-      if users_vehicle.save
+      if users_vehicle.save && vehicle_invitation.update(is_valid: false)
         render json: users_vehicle, status: :ok
       else
         render json: users_vehicle.errors, status: :unprocessable_entity

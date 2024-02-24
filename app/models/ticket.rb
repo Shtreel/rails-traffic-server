@@ -2,6 +2,7 @@ class Ticket < ApplicationRecord
   belongs_to :vehicle
   has_many :users_vehicles, through: :vehicle
   has_many :users, through: :users_vehicles
+  has_many :payments
 
   validates :vehicle, presence: true
   validates :cost, presence: true
