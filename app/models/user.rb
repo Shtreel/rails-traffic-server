@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_many :users_vehicles
   has_many :vehicles, through: :users_vehicles
   has_many :tickets, through: :vehicles
+  has_many :payments, through: :tickets
 
   validates :firebase_id, uniqueness: true
   validates :firebase_id, presence: true

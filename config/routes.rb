@@ -12,12 +12,15 @@ Rails.application.routes.draw do
           get :payment_intent, on: :member
         end
 
+        resources :payments, only: %w[index]
         resources :vehicles, only: %w[index show create]
       end
 
       resources :map_markers, only: %w[index create]
       resources :tickets, only: %w[create]
-      resources :payments, only: %w[create]
+      resources :stripe, only: %w[] do
+        post :webhook, on: :collection
+      end
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
