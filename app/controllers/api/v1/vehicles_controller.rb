@@ -1,14 +1,26 @@
 class Api::V1::VehiclesController < ApplicationController
+  before_action :set_user, only: [:index, :show]
+
   def index
-    vehicles = User.find_by(firebase_id: params[:user_id]).vehicles
+    vehicles = []
+    vehicles["users"] = @user.
+    @user.vehicles.each do |vehicle|
+      json_vehicle = vehicle.as_json
+      json_vehicle["users"] = vehicle.users.where.not(id: @user.id).pluck(:name)
+      vehicles.append(json_vehicle)
+    end
+
     render json: vehicles, status: :ok
   end
 
   def show
-    vehicle = User.find_by(firebase_id: params[:user_id]).vehicles.find_by_id(params[:id])
+    vehicle = @user.vehicles.find_by_id(params[:id])
 
     if vehicle.present?
-      render json: vehicle, status: :ok
+      json_vehicle = vehicle.as_json
+      json_vehicle["users"] = vehicle.users.where.not(id: @user.id).pluck(:name)
+
+      render json: json_vehicle, status: :ok
     else
       render json: { error: "Vehicle not found" }
     end
@@ -24,6 +36,12 @@ class Api::V1::VehiclesController < ApplicationController
     else
       render json: vehicle.errors, status: :unprocessable_entity
     end
+  end
+
+  private
+
+  def set_user
+    @user = User.find_by(firebase_id: params[:user_id])
   end
 
   def vehicle_params
