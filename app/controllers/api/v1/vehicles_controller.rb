@@ -3,7 +3,6 @@ class Api::V1::VehiclesController < ApplicationController
 
   def index
     vehicles = []
-    vehicles["users"] = @user.
     @user.vehicles.each do |vehicle|
       json_vehicle = vehicle.as_json
       json_vehicle["users"] = vehicle.users.where.not(id: @user.id).pluck(:name)
