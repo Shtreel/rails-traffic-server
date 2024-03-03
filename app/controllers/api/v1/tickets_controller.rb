@@ -11,6 +11,22 @@ class Api::V1::TicketsController < ApplicationController
     ticket.vehicle = Vehicle.find_by(licence_plate: params["ticket"]["licence_plate"], province: params["ticket"]["province"])
 
     if ticket.save
+      push_tokens = ticket.users.pluck(:push_token)
+      client = Exponent::Push::Client.new
+      messages = []
+
+      push_tokens.each do |push_token|
+        messages.append({
+          to: "ExponentPushToken[#{push}]",
+          sound: "default",
+          title: "New Ticket Received",
+          body: "Vehicle with license plate #{ticket.vehicle.licence_plate} received a ticket"
+        })
+      end
+
+      handler = client.send_messages(messages)
+      
+
       render json: ticket, status: :ok
     else
       render json: ticket.errors, status: :unprocessable_entity

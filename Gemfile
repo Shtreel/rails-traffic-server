@@ -16,6 +16,8 @@ gem 'delayed_job_active_record'
 
 gem 'stripe'
 
+gem 'exponent-server-sdk'
+
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
 

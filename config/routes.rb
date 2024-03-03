@@ -12,6 +12,7 @@ Rails.application.routes.draw do
           get :payment_intent, on: :member
         end
 
+        put :push_token, on: :member
         resources :payments, only: %w[index]
         resources :vehicles, only: %w[index show create]
       end
