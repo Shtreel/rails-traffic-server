@@ -34,13 +34,17 @@ class Api::V1::TicketsController < ApplicationController
   end
 
   def dispute
-    @ticket.update(status: "in_dispute") if @ticket.status == "pending"
+    if @ticket.status == "pending"
+      @ticket.update(status: "in_dispute", dispute_reason: params[:reason])
+    else
+      @ticket.update(dispute_reason: "")
+    end
 
     render status: :ok
   end
 
   def dispute_result
-    @ticket.update(status: dispute_params["status"])
+    @ticket.update(status: dispute_params["status"], reason: "")
   end
 
   def payment_intent

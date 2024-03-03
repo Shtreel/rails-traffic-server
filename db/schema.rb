@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_03_152508) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_03_200404) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -56,6 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_03_152508) do
     t.bigint "vehicle_id"
     t.string "status", default: "pending", null: false
     t.string "ticket_number", null: false
+    t.string "dispute_reason"
     t.index ["vehicle_id"], name: "index_tickets_on_vehicle_id"
   end
 
