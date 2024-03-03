@@ -1,6 +1,6 @@
 class Api::V1::StripeController < ApplicationController
   def webhook
-    payload = request.body.read
+    payload = request.body.decode('utf-8')
     sig_header = request.env['HTTP_STRIPE_SIGNATURE']
     event = nil
 
