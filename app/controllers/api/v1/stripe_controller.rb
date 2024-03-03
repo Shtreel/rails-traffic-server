@@ -30,7 +30,7 @@ class Api::V1::StripeController < ApplicationController
       ticket.update(status: "paid")
 
       PaymentMailer.with(ticket: ticket)
-                   .send_invite_email
+                   .send_payment_email
                    .deliver_now
     end
 
