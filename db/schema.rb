@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_03_200404) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_03_204118) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -72,7 +72,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_03_200404) do
     t.index ["firebase_id"], name: "unique_firebase_id", unique: true
   end
 
-  create_table "users_vehicles", id: false, force: :cascade do |t|
+  create_table "users_vehicles", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "vehicle_id", null: false
     t.index ["user_id"], name: "index_users_vehicles_on_user_id"
