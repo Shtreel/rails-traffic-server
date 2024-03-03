@@ -47,7 +47,7 @@ class Api::V1::TicketsController < ApplicationController
     previous_status = @ticket.status
     @ticket.update(status: params["status"])
 
-    TicketMailer.with(ticket: ticket,
+    TicketMailer.with(ticket: @ticket,
                       dispute_result: params["reason"],
                       previous_status: previous_status)
                 .ticket_status_changed
