@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Status changed for ticket: <%= @ticket.ticket_number %></p>
+    <p>
+    Previous Status<br>
+    --------------------------
+    </p>
+    <p>Status: <%= @previous_status %></p>
+    <p>Dispute Reason: <%= @ticket.dispute_reason %></p>
+    <p>
+    --------------------------
+    New Status
+    </p>
+    <p>Status: <%= @ticket.status %></p>
+    <p>Dispute Result: <%= @dispute_result %></p>
+    <p>
+    --------------------------
+    </p>
+  </body>
+</html>

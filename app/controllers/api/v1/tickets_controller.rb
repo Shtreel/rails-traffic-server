@@ -44,7 +44,14 @@ class Api::V1::TicketsController < ApplicationController
   end
 
   def dispute_result
-    @ticket.update(status: dispute_params["status"], dispute_reason: params[:reason])
+    previous_status = @ticket.status
+    @ticket.update(status: params["status"])
+
+    TicketMailer.with(ticket: ticket,
+                      dispute_result: params["reason"],
+                      previous_status: previous_status)
+                .ticket_status_changed
+                .deliver_now
   end
 
   def payment_intent
@@ -66,10 +73,6 @@ class Api::V1::TicketsController < ApplicationController
 
   def ticket_params
     params.require(:ticket).permit(:ticket_number, :cost, :penalty_type, :issue_date, :due_date)
-  end
-
-  def dispute_params
-    params.permit(:status)
   end
 
   def set_ticket
