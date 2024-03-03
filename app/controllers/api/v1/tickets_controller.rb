@@ -17,7 +17,7 @@ class Api::V1::TicketsController < ApplicationController
 
       push_tokens.each do |push_token|
         messages.append({
-          to: "ExponentPushToken[#{push_token}]",
+          to: push_token,
           sound: "default",
           title: "New Ticket Received",
           body: "Vehicle with license plate #{ticket.vehicle.licence_plate} received a ticket"
