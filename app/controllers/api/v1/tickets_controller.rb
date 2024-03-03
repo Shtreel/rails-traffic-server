@@ -44,7 +44,7 @@ class Api::V1::TicketsController < ApplicationController
   end
 
   def dispute_result
-    @ticket.update(status: dispute_params["status"], reason: "")
+    @ticket.update(status: dispute_params["status"], dispute_reason: params[:reason])
   end
 
   def payment_intent
