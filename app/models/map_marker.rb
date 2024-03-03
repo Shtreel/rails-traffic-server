@@ -3,5 +3,5 @@ class MapMarker < ApplicationRecord
   validates :latitude, presence: true
   validates :name, presence: true
 
-  enum icon_type: { redlight: "redlight", speedtrap: "speedtrap" }
+  enum icon_type: { redlight: "redlight", speedtrap: "speedtrap", parking: "parking" }
 end
