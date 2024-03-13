@@ -1,8 +1,8 @@
 class Vehicle < ApplicationRecord
-  has_many :users_vehicles
+  has_many :users_vehicles, dependent: :destroy
   has_many :users, through: :users_vehicles
-  has_many :tickets
-  has_many :vehicle_invitations
+  has_many :tickets, dependent: :destroy
+  has_many :vehicle_invitations, dependent: :destroy
 
   validates :licence_plate, presence: true
   validates :province, presence: true

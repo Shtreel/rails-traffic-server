@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
         put :push_token, on: :member
         resources :payments, only: %w[index]
-        resources :vehicles, only: %w[index show create]
+        resources :vehicles, only: %w[index show destroy create]
       end
 
       resources :map_markers, only: %w[index create]

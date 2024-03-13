@@ -1,5 +1,5 @@
 class Api::V1::VehiclesController < ApplicationController
-  before_action :set_user, only: [:index, :show]
+  before_action :set_user, only: [:index, :show, :destroy]
 
   def index
     vehicles = []
@@ -20,6 +20,16 @@ class Api::V1::VehiclesController < ApplicationController
       json_vehicle["users"] = vehicle.users.where.not(id: @user.id).pluck(:name)
 
       render json: json_vehicle, status: :ok
+    else
+      render json: { error: "Vehicle not found" }
+    end
+  end
+
+  def destroy
+    vehicle = @user.vehicles.find_by_id(params[:id])
+
+    if vehicle.destroy
+      render status: :ok
     else
       render json: { error: "Vehicle not found" }
     end
