@@ -11,7 +11,7 @@ class Api::V1::TicketsController < ApplicationController
     ticket.vehicle = Vehicle.find_by(licence_plate: params["ticket"]["licence_plate"], province: params["ticket"]["province"])
 
     if ticket.save
-      push_tokens = ticket.users.pluck(:push_token)
+      push_tokens = ticket.users.pluck(:push_token).compact
       client = Exponent::Push::Client.new
       messages = []
 
